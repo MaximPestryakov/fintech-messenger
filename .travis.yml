@@ -1,0 +1,30 @@
+sudo: false
+
+language: android
+jdk: oraclejdk8
+
+android:
+  components:
+    - android-25
+    - build-tools-25.0.2
+    - extra-android-m2repository
+    - platform-tools
+    - tools
+
+script: ./gradlew assemble
+
+notifications:
+  email: false
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "d57023b08b685ea841e44aff73dc84d34787b1fe"
+  file_glob: true
+  file: "app/build/outputs/apk/*-release.apk"
+  skip_cleanup: true
+  on:
+    branch: master
+
+after_success:
+  - sh set_tags.sh  
