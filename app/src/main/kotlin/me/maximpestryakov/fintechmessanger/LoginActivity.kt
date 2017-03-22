@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
 
         login.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(EMAIL_KEY, email.text.toString());
             startActivity(intent)
         }
     }
