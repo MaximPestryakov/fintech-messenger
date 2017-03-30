@@ -1,3 +1,3 @@
-package me.maximpestryakov.fintechmessanger.model
+package me.maximpestryakov.fintechmessenger.model
 
 data class Dialog(val id: Int, val lastMessage: Message)

@@ -1,4 +1,4 @@
-package me.maximpestryakov.fintechmessanger
+package me.maximpestryakov.fintechmessenger
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,9 +12,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         login.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra(EMAIL_KEY, email.text.toString());
-            startActivity(intent)
+            Intent(this, NavigationActivity::class.java).apply {
+                putExtra(EMAIL_KEY, email.text.toString());
+                startActivity(this)
+            }
         }
     }
 }

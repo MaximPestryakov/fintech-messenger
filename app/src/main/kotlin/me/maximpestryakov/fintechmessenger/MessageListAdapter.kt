@@ -1,4 +1,4 @@
-package me.maximpestryakov.fintechmessanger
+package me.maximpestryakov.fintechmessenger
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_message_left.view.*
 import kotlinx.android.synthetic.main.item_message_right.view.*
-import me.maximpestryakov.fintechmessanger.model.Message
+import me.maximpestryakov.fintechmessenger.model.Message
 
 class MessageListAdapter(val userId: Int) : RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
 
@@ -34,13 +34,13 @@ class MessageListAdapter(val userId: Int) : RecyclerView.Adapter<MessageListAdap
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder) {
         val message = messages[position]
 
         if (getItemViewType(position) == TYPE_USER) {
-            holder.bindUserMessage(message)
+            bindUserMessage(message)
         } else {
-            holder.bindFriendMessage(message)
+            bindFriendMessage(message)
         }
     }
 
@@ -49,12 +49,12 @@ class MessageListAdapter(val userId: Int) : RecyclerView.Adapter<MessageListAdap
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bindUserMessage(message: Message) {
-            view.messageRight.text = message.body
+        fun bindUserMessage(message: Message) = with(itemView) {
+            messageRight.text = message.body
         }
 
-        fun bindFriendMessage(message: Message) {
-            view.messageLeft.text = message.body
+        fun bindFriendMessage(message: Message) = with(itemView) {
+            messageLeft.text = message.body
         }
     }
 }

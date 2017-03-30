@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name">Fintech Messanger</string>
+    <string name="app_name">Fintech Messenger</string>
 
     <string name="email">Email</string>
     <string name="password">Пароль</string>
+
+    <string name="menu_dialogs">Диалоги</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_about">О приложении</string>
+    <string name="menu_exit">Выход</string>
 </resources>

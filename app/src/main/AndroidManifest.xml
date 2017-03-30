@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.maximpestryakov.fintechmessanger">
+    package="me.maximpestryakov.fintechmessenger">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name="me.maximpestryakov.fintechmessenger.LoginActivity"
             android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DialogActivity" />
+        <activity android:name="me.maximpestryakov.fintechmessenger.DialogActivity" />
+        <activity
+            android:name="me.maximpestryakov.fintechmessenger.NavigationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

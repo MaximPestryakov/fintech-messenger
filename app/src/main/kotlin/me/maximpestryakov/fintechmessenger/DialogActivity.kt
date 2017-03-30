@@ -1,15 +1,15 @@
-package me.maximpestryakov.fintechmessanger
+package me.maximpestryakov.fintechmessenger
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_dialog.*
-import me.maximpestryakov.fintechmessanger.model.Message
+import me.maximpestryakov.fintechmessenger.model.Message
 
 
 class DialogActivity : AppCompatActivity() {
 
-    var adapter: MessageListAdapter? = null
+    var messageAdapter = MessageListAdapter(123)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,17 +28,16 @@ class DialogActivity : AppCompatActivity() {
     }
 
     fun initMessageList() {
-        adapter = MessageListAdapter(123)
-
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.reverseLayout = true
-
-        messageList.setHasFixedSize(true)
-        messageList.layoutManager = layoutManager
-        messageList.adapter = adapter
+        messageList.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@DialogActivity).apply {
+                reverseLayout = true
+            }
+            adapter = messageAdapter
+        }
     }
 
     fun updateMessageList(messages: List<Message>) {
-        adapter?.messages = messages
+        messageAdapter.messages = messages
     }
 }

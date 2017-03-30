@@ -4,4 +4,4 @@
     android:id="@+id/dialogList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="me.maximpestryakov.fintechmessanger.MainActivity" />
+    tools:context=".DialogsFragment" />

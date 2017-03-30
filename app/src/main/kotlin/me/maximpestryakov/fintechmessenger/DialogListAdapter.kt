@@ -1,11 +1,11 @@
-package me.maximpestryakov.fintechmessanger
+package me.maximpestryakov.fintechmessenger
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_dialog.view.*
-import me.maximpestryakov.fintechmessanger.model.Dialog
+import me.maximpestryakov.fintechmessenger.model.Dialog
 
 class DialogListAdapter(val itemClick: (Dialog) -> Unit) :
         RecyclerView.Adapter<DialogListAdapter.ViewHolder>() {
@@ -21,17 +21,17 @@ class DialogListAdapter(val itemClick: (Dialog) -> Unit) :
         return ViewHolder(view, itemClick)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindDialog(dialogs[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder) {
+        bindDialog(dialogs[position])
     }
 
-    override fun getItemCount(): Int = dialogs.size
+    override fun getItemCount() = dialogs.size
 
     class ViewHolder(val view: View, val itemClick: (Dialog) -> Unit) : RecyclerView.ViewHolder(view) {
 
-        fun bindDialog(dialog: Dialog) {
-            view.myTextView.text = dialog.lastMessage.body
-            view.setOnClickListener { itemClick(dialog) }
+        fun bindDialog(dialog: Dialog) = with(itemView) {
+            myTextView.text = dialog.lastMessage.body
+            setOnClickListener { itemClick(dialog) }
         }
     }
 }
