@@ -1,10 +1,11 @@
-package me.maximpestryakov.fintechmessenger
+package me.maximpestryakov.fintechmessenger.dialog_list
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_dialog.view.*
+import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.model.Dialog
 
 class DialogListAdapter(val itemClick: (Dialog) -> Unit) :

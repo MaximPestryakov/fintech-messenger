@@ -1,4 +1,4 @@
-package me.maximpestryakov.fintechmessenger
+package me.maximpestryakov.fintechmessenger.navigation
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -10,6 +10,11 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.layout_header_navigation.view.*
 import kotlinx.android.synthetic.main.layout_main_content.*
+import me.maximpestryakov.fintechmessenger.EMAIL_KEY
+import me.maximpestryakov.fintechmessenger.R
+import me.maximpestryakov.fintechmessenger.about.AboutFragment
+import me.maximpestryakov.fintechmessenger.dialog_list.DialogListFragment
+import me.maximpestryakov.fintechmessenger.settings.SettingsFragment
 
 
 class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -48,15 +53,15 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_dialogs -> {
-                val dialogsFragment = DialogsFragment.newInstance(123)
+                val dialogsFragment = DialogListFragment.newInstance(123)
                 addFragment(dialogsFragment)
             }
             R.id.nav_settings -> {
-                val settingsFragment = StubFragment.newInstance("Настройки")
+                val settingsFragment = SettingsFragment()
                 addFragment(settingsFragment)
             }
             R.id.nav_about -> {
-                val aboutFragment = StubFragment.newInstance("О приложении")
+                val aboutFragment = AboutFragment()
                 addFragment(aboutFragment)
             }
             R.id.nav_exit -> finish()

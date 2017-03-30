@@ -1,4 +1,4 @@
-package me.maximpestryakov.fintechmessenger
+package me.maximpestryakov.fintechmessenger.dialog_list
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_dialog_list.*
+import me.maximpestryakov.fintechmessenger.DIALOG_ID_KEY
+import me.maximpestryakov.fintechmessenger.R
+import me.maximpestryakov.fintechmessenger.dialog.DialogActivity
 import me.maximpestryakov.fintechmessenger.model.Dialog
 import me.maximpestryakov.fintechmessenger.model.Message
 
-class DialogsFragment private constructor() : Fragment() {
+class DialogListFragment : Fragment() {
 
     var userId: Int = 0
     var dialogAdapter: DialogListAdapter? = null
@@ -23,7 +26,7 @@ class DialogsFragment private constructor() : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View = with(inflater) {
-        return inflate(R.layout.activity_main, container, false)
+        return inflate(R.layout.fragment_dialog_list, container, false)
     }
 
     override fun onResume() {
@@ -56,7 +59,7 @@ class DialogsFragment private constructor() : Fragment() {
     companion object {
         val USER_ID_KEY = "user_id"
 
-        fun newInstance(userId: Int) = DialogsFragment().apply {
+        fun newInstance(userId: Int) = DialogListFragment().apply {
             arguments = Bundle().apply {
                 putInt(USER_ID_KEY, userId)
             }

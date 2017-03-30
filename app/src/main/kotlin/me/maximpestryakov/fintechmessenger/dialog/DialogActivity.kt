@@ -1,15 +1,16 @@
-package me.maximpestryakov.fintechmessenger
+package me.maximpestryakov.fintechmessenger.dialog
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_dialog.*
+import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.model.Message
 
 
 class DialogActivity : AppCompatActivity() {
 
-    var messageAdapter = MessageListAdapter(123)
+    var messageAdapter = DialogAdapter(123)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

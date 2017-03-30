@@ -1,4 +1,4 @@
-package me.maximpestryakov.fintechmessenger
+package me.maximpestryakov.fintechmessenger.dialog
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_message_left.view.*
 import kotlinx.android.synthetic.main.item_message_right.view.*
+import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.model.Message
 
-class MessageListAdapter(val userId: Int) : RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
+class DialogAdapter(val userId: Int) : RecyclerView.Adapter<DialogAdapter.ViewHolder>() {
 
     private val TYPE_USER = 0
     private val TYPE_FRIEND = 1
