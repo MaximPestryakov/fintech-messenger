@@ -17,7 +17,7 @@ import me.maximpestryakov.fintechmessenger.model.Message
 class DialogListFragment : Fragment() {
 
     var userId: Int = 0
-    var dialogAdapter: DialogListAdapter? = null
+    private lateinit var dialogAdapter: DialogListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +29,12 @@ class DialogListFragment : Fragment() {
         return inflate(R.layout.fragment_dialog_list, container, false)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initDialogList()
         updateDialogList(listOf(Dialog(3, Message(4, 3, "Привет", 1490271711))))
     }
-
 
     fun initDialogList() {
         dialogAdapter = DialogListAdapter { (id) ->

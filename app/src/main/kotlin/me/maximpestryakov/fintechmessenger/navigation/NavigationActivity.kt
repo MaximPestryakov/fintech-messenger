@@ -20,7 +20,7 @@ import me.maximpestryakov.fintechmessenger.settings.SettingsFragment
 class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val MENU_DIALOGS = 0
-    private var toggle: ActionBarDrawerToggle? = null
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         setSupportActionBar(toolbar)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
-        drawerLayout.addDrawerListener(toggle!!)
+        drawerLayout.addDrawerListener(toggle)
 
         navigationView.setNavigationItemSelectedListener(this)
 
@@ -73,7 +73,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        toggle!!.syncState()
+        toggle.syncState()
     }
 
     private fun addFragment(fragment: Fragment) {
