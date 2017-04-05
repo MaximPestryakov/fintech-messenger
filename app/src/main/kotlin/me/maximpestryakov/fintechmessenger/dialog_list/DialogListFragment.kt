@@ -16,7 +16,7 @@ import me.maximpestryakov.fintechmessenger.model.Message
 
 class DialogListFragment : Fragment() {
 
-    var userId: Int = 0
+    private var userId: Int = 0
     private lateinit var dialogAdapter: DialogListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ class DialogListFragment : Fragment() {
     }
 
     fun updateDialogList(dialogs: List<Dialog>) {
-        dialogAdapter?.dialogs = dialogs
+        dialogAdapter.dialogs = dialogs
     }
 
     companion object {

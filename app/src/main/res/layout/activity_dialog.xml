@@ -6,13 +6,10 @@
     android:layout_height="match_parent"
     tools:context="me.maximpestryakov.fintechmessenger.dialog.DialogActivity">
 
-    <EditText
-        android:id="@+id/message"
+    <me.maximpestryakov.fintechmessenger.MessageSenderView
+        android:id="@+id/messageSender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Message"
-        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
@@ -27,7 +24,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/message"
+        app:layout_constraintBottom_toTopOf="@+id/messageSender"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

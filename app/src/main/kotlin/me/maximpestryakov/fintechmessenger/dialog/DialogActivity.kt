@@ -11,6 +11,8 @@ import me.maximpestryakov.fintechmessenger.model.Message
 class DialogActivity : AppCompatActivity() {
 
     var messageAdapter = DialogAdapter(123)
+    val messages = mutableListOf(Message(4, 3, "Привет", 1490271711), Message(5, 123, "Привет)))", 1490271712))
+    var testId = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,12 +22,11 @@ class DialogActivity : AppCompatActivity() {
 
         initMessageList()
 
-        val messages = listOf(
-                Message(4, 3, "Привет", 1490271711),
-                Message(5, 123, "Привет)))", 1490271712)
-        ).sortedByDescending { it.time }
-
-        updateMessageList(messages)
+        updateMessageList()
+        messageSender.onSendListener = { s: String ->
+            messages.add(Message(testId++, 123, s, messages.last().time + testId))
+            updateMessageList()
+        }
     }
 
     fun initMessageList() {
@@ -38,7 +39,7 @@ class DialogActivity : AppCompatActivity() {
         }
     }
 
-    fun updateMessageList(messages: List<Message>) {
-        messageAdapter.messages = messages
+    fun updateMessageList() {
+        messageAdapter.messages = messages.sortedByDescending { it.time }
     }
 }

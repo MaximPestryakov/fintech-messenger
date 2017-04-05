@@ -77,8 +77,9 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     }
 
     private fun addFragment(fragment: Fragment) {
-        var fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction = fragmentTransaction.replace(R.id.contentNavigation, fragment)
-        fragmentTransaction.commit()
+        supportFragmentManager.beginTransaction().apply {
+            setCustomAnimations(R.anim.popup_in, R.anim.popup_out)
+            replace(R.id.contentNavigation, fragment)
+        }.commit()
     }
 }
