@@ -52,10 +52,12 @@ class DialogAdapter(val userId: Int) : RecyclerView.Adapter<DialogAdapter.ViewHo
 
         fun bindUserMessage(message: Message) = with(itemView) {
             messageRight.text = message.body
+            messageRight.date = "4:20"
         }
 
         fun bindFriendMessage(message: Message) = with(itemView) {
             messageLeft.text = message.body
+            messageLeft.date = "4:19"
         }
     }
 }
