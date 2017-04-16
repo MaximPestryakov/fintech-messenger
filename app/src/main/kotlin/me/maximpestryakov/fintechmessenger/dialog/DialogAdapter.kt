@@ -24,13 +24,11 @@ class DialogAdapter(val userId: Int) : RecyclerView.Adapter<DialogAdapter.ViewHo
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
+        val inflater = LayoutInflater.from(parent.context)
 
-        val view = if (viewType == TYPE_USER) {
-            layoutInflater.inflate(R.layout.item_message_right, parent, false)
-        } else {
-            layoutInflater.inflate(R.layout.item_message_left, parent, false)
-        }
+        val view = inflater.inflate(
+                if (viewType == TYPE_USER) R.layout.item_message_right
+                else R.layout.item_message_left, parent, false)
 
         return ViewHolder(view)
     }

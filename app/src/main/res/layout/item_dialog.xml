@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="72dp"
-    android:background="?android:selectableItemBackground">
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    tools:context=".dialog_list.DialogListAdapter">
+
+    <ImageView
+        android:id="@+id/itemAvatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
-        android:id="@+id/myTextView"
-        android:layout_width="96dp"
-        android:layout_height="28dp"
-        tools:text="TextView" />
+        android:id="@+id/itemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/itemAvatar"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
+        tools:text="Название диалога" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/itemLastMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/itemTitle"
+        android:layout_below="@+id/itemTitle"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="14sp"
+        tools:text="Последнее сообщение" />
+
+    <TextView
+        android:id="@+id/itemTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/itemLastMessage"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="14sp"
+        tools:text="16:37" />
+
+</RelativeLayout>

@@ -10,7 +10,6 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_navigation.*
 import kotlinx.android.synthetic.main.layout_header_navigation.view.*
 import kotlinx.android.synthetic.main.layout_main_content.*
-import me.maximpestryakov.fintechmessenger.EMAIL_KEY
 import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.about.AboutFragment
 import me.maximpestryakov.fintechmessenger.dialog_list.DialogListFragment
@@ -19,14 +18,18 @@ import me.maximpestryakov.fintechmessenger.settings.SettingsFragment
 
 class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val MENU_DIALOGS = 0
+    companion object {
+        val EXTRA_EMAIL = "me.maximpestryakov.fintechmessenger.navigation.EXTRA_EMAIL"
+        private val MENU_DIALOGS = 0
+    }
+
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
-        val email = intent.getStringExtra(EMAIL_KEY)
+        val email = intent.getStringExtra(EXTRA_EMAIL)
         navigationView.getHeaderView(0).textView.text = email
 
         setSupportActionBar(toolbar)

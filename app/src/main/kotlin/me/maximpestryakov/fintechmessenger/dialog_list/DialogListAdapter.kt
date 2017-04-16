@@ -31,7 +31,9 @@ class DialogListAdapter(val itemClick: (Dialog) -> Unit) :
     class ViewHolder(val view: View, val itemClick: (Dialog) -> Unit) : RecyclerView.ViewHolder(view) {
 
         fun bindDialog(dialog: Dialog) = with(itemView) {
-            myTextView.text = dialog.lastMessage.body
+            itemTitle.text = "Иван Иванов"
+            itemLastMessage.text = dialog.lastMessage.body
+            itemTime.text = "16:37"
             setOnClickListener { itemClick(dialog) }
         }
     }

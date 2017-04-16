@@ -40,7 +40,7 @@ class MessageSenderView : RelativeLayout {
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                sendButton.visibility = if (s.isEmpty()) View.GONE else View.VISIBLE
+                sendButton.visibility = if (s.trim().isEmpty()) View.GONE else View.VISIBLE
             }
         })
     }
