@@ -1,47 +1,54 @@
 package me.maximpestryakov.fintechmessenger.login
 
 import android.os.Bundle
-import android.support.v4.app.LoaderManager.LoaderCallbacks
-import android.support.v4.content.Loader
 import android.support.v7.app.AppCompatActivity
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import kotlinx.android.synthetic.main.activity_login.*
 import me.maximpestryakov.fintechmessenger.R
+import me.maximpestryakov.fintechmessenger.login.LoginTaskFragment.Companion.LoginListener
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity.Companion.EXTRA_EMAIL
 import org.jetbrains.anko.startActivity
+import java.lang.Thread.sleep
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : AppCompatActivity(), LoginView, LoginListener {
 
-    lateinit var loginLoader: Loader<String>
+    lateinit var loginTaskFragment: LoginTaskFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val args = LoginLoader.getInitBundle(email.text.toString(), password.text.toString())
-        loginLoader = supportLoaderManager.initLoader(0, args, object : LoaderCallbacks<String> {
-            override fun onCreateLoader(id: Int, args: Bundle) = LoginLoader(this@LoginActivity, args)
+        val fragment = supportFragmentManager.findFragmentByTag(LoginTaskFragment.TAG)
+        if (fragment == null) {
+            loginTaskFragment = LoginTaskFragment.newInstance
+            supportFragmentManager.beginTransaction().apply {
+                add(loginTaskFragment, LoginTaskFragment.TAG)
+                addToBackStack(null)
+            }.commit()
+        } else {
+            loginTaskFragment = fragment as LoginTaskFragment
+        }
 
-            override fun onLoaderReset(loader: Loader<String>) = Unit
-
-            override fun onLoadFinished(loader: Loader<String>, email: String) {
-                startActivity<NavigationActivity>(EXTRA_EMAIL to email)
-                finish()
-            }
-        })
-
-        if (loginLoader.isStarted) {
+        if (loginTaskFragment.started) {
             showLoading()
         } else {
             showLoginForm()
         }
 
         login.setOnClickListener {
+            loginTaskFragment.start {
+                sleep(5000)
+                email.text.toString()
+            }
             showLoading()
-            supportLoaderManager.getLoader<String>(0).forceLoad()
         }
+    }
+
+    override fun onLogin(email: String) {
+        startActivity<NavigationActivity>(EXTRA_EMAIL to email)
+        finish()
     }
 
     override fun showLoginForm() {

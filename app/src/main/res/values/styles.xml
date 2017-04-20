@@ -21,4 +21,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/tinkoffYellow</item>
+        <item name="colorPrimaryDark">#E6C728</item>
+        <item name="colorAccent">#343D4C</item>
+        <item name="android:background">@drawable/splash_screen</item>
+    </style>
+
 </resources>
