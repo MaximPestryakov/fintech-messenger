@@ -8,4 +8,8 @@
     <string name="menu_settings">Настройки</string>
     <string name="menu_about">О приложении</string>
     <string name="menu_exit">Выход</string>
+
+    <string name="who_is_the_creator">Who is the Creator?</string>
+    <string name="creator_name">Maxim Pestryakov</string>
+    <string name="creator_link">http://maximpestryakov.me/</string>
 </resources>

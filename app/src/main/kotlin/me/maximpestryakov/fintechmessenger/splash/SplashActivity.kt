@@ -3,7 +3,6 @@ package me.maximpestryakov.fintechmessenger.splash
 import android.app.Activity
 import android.os.Bundle
 import me.maximpestryakov.fintechmessenger.BuildConfig
-import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.login.LoginActivity
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
@@ -17,7 +16,7 @@ class SplashActivity : Activity() {
 
         if (BuildConfig.DEBUG) {
             doAsync {
-                sleep(3000)
+                sleep(0)
                 uiThread { start() }
             }
         } else {

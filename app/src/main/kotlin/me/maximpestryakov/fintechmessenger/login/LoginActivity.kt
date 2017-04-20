@@ -38,11 +38,11 @@ class LoginActivity : AppCompatActivity(), LoginView, LoginListener {
         }
 
         login.setOnClickListener {
+            showLoading()
             loginTaskFragment.start {
-                sleep(5000)
+                sleep(0)
                 email.text.toString()
             }
-            showLoading()
         }
     }
 
