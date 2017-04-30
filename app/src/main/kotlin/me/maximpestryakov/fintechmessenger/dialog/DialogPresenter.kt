@@ -2,7 +2,7 @@ package me.maximpestryakov.fintechmessenger.dialog
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.raizlabs.android.dbflow.kotlinextensions.save
+import io.realm.Realm
 import me.maximpestryakov.fintechmessenger.model.Message
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -17,8 +17,15 @@ class DialogPresenter : MvpPresenter<DialogView>() {
 
     fun onSendMessage(messageText: String, userId: Int, dialogId: Int) {
         doAsync {
-            val message = Message(body = messageText, userId = userId, dialogId = dialogId)
-            message.save()
+
+            Realm.getDefaultInstance().use {
+
+                it.executeTransaction { realm ->
+                    val lastId = realm.where(Message::class.java).max("id")?.toInt() ?: 0
+                    val message = Message(id = lastId + 1, body = messageText, userId = userId, dialogId = dialogId)
+                    realm.copyToRealm(message)
+                }
+            }
             // sleep(1000)
             uiThread {
                 viewState.updateMessageList()

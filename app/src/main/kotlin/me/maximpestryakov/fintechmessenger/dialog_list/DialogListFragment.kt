@@ -42,8 +42,8 @@ class DialogListFragment : MvpAppCompatFragment(), DialogListView {
     }
 
     override fun initDialogList() {
-        dialogAdapter = DialogListAdapter { (id) ->
-            startActivity<DialogActivity>(EXTRA_USER_ID to userId, EXTRA_DIALOG_ID to id)
+        dialogAdapter = DialogListAdapter { dialog ->
+            startActivity<DialogActivity>(EXTRA_USER_ID to userId, EXTRA_DIALOG_ID to dialog.id)
         }
 
         dialogList.apply {

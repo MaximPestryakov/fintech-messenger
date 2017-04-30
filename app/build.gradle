@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'realm-android'
 
 android {
     signingConfigs {
@@ -62,7 +63,7 @@ ext {
     picassoVerion = '2.5.2'
     ankoVersion = '0.10.0-beta-2'
     moxyVersion = '1.5.1'
-    dbFlowVersion = '4.0.0-beta7'
+    dbFlowVersion = '3.1.1'
 }
 
 kapt {
@@ -106,11 +107,4 @@ dependencies {
     compile "com.arello-mobile:moxy-android:$moxyVersion"
     compile "com.arello-mobile:moxy-app-compat:$moxyVersion"
     kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
-
-    // DBFlow
-    compile "com.github.Raizlabs.DBFlow:dbflow:$dbFlowVersion"
-    compile "com.github.Raizlabs.DBFlow:dbflow-core:$dbFlowVersion"
-    compile "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:$dbFlowVersion"
-    kapt "com.github.Raizlabs.DBFlow:dbflow-processor:$dbFlowVersion"
-
 }

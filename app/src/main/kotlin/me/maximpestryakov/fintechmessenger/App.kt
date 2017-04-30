@@ -2,8 +2,8 @@ package me.maximpestryakov.fintechmessenger
 
 import android.app.Application
 import android.content.Context
-import com.raizlabs.android.dbflow.config.FlowManager
-import java.util.*
+import io.realm.Realm
+
 
 class App : Application() {
 
@@ -13,9 +13,6 @@ class App : Application() {
     }
 
     override fun onCreate() {
-
-        resources.configuration.locale
-
-        FlowManager.init(this)
+        Realm.init(this);
     }
 }

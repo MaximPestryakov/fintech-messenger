@@ -4,14 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.raizlabs.android.dbflow.kotlinextensions.*
-import com.raizlabs.android.dbflow.sql.language.OrderBy.fromProperty
+import io.realm.Realm
+import io.realm.Sort
 import kotlinx.android.synthetic.main.item_message_left.view.*
 import kotlinx.android.synthetic.main.item_message_right.view.*
 import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.model.Message
-import me.maximpestryakov.fintechmessenger.model.Message_Table.date
-import me.maximpestryakov.fintechmessenger.model.Message_Table.dialogId
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -26,18 +24,18 @@ class DialogAdapter(val userId: Int, val currentDialogId: Int) : RecyclerView.Ad
             notifyDataSetChanged()
         }
 
-    fun update() {
-        doAsync {
-            val updatedMessages = (select
-                    from Message::class
-                    where (dialogId eq currentDialogId)
-                    orderBy fromProperty(date).descending()
-                    ).list
-            uiThread {
-                messages = updatedMessages
-            }
+    fun update() = doAsync {
+        var updatedMessages = emptyList<Message>()
+        Realm.getDefaultInstance().use { realm ->
+            updatedMessages = realm.copyFromRealm(realm.where(Message::class.java)
+                    .equalTo("dialogId", currentDialogId)
+                    .findAllSorted("date", Sort.DESCENDING))
+        }
+        uiThread {
+            messages = updatedMessages
         }
     }
+
 
     override fun getItemViewType(position: Int) = if (messages[position].userId == userId) TYPE_USER else TYPE_FRIEND
 

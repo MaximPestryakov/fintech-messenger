@@ -1,21 +1,20 @@
 package me.maximpestryakov.fintechmessenger.model
 
-import com.raizlabs.android.dbflow.annotation.Column
-import com.raizlabs.android.dbflow.annotation.PrimaryKey
-import com.raizlabs.android.dbflow.annotation.Table
+import io.realm.RealmObject
+import io.realm.annotations.PrimaryKey
+import io.realm.annotations.RealmClass
 
-@Table(database = AppDatabase::class)
-data class Dialog(
+@RealmClass
+open class Dialog(
 
-        @PrimaryKey(autoincrement = true)
-        var id: Int = 0,
+        @PrimaryKey
+        open var id: Int = 0,
 
-        @Column
-        var title: String = "",
+        open var title: String = "",
 
-        @Column
-        var description: String = "",
+        open var description: String = "",
 
-        @Column
-        var date: Long = 0
-)
+        open var date: Long = 0,
+
+        open var lastMessage: String = ""
+) : RealmObject()
