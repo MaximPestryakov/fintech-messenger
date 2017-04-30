@@ -10,7 +10,9 @@ import org.jetbrains.anko.uiThread
 @InjectViewState
 class DialogListPresenter : MvpPresenter<DialogListView>() {
 
-    init {
+    override fun attachView(view: DialogListView?) {
+        super.attachView(view)
+
         viewState.initDialogList()
         viewState.updateDialogList()
     }

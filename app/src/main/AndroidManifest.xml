@@ -19,15 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".login.LoginActivity"
-            android:theme="@style/LoginTheme" />
-        <activity
-            android:name="me.maximpestryakov.fintechmessenger.dialog.DialogActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="me.maximpestryakov.fintechmessenger.navigation.NavigationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name="me.maximpestryakov.fintechmessenger.dialog.DialogActivity" />
+        <activity android:name="me.maximpestryakov.fintechmessenger.navigation.NavigationActivity" />
     </application>
 
 </manifest>
