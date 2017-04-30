@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.realm.Realm
-import io.realm.Sort
+import io.realm.Sort.DESCENDING
 import kotlinx.android.synthetic.main.item_message_left.view.*
 import kotlinx.android.synthetic.main.item_message_right.view.*
 import me.maximpestryakov.fintechmessenger.R
@@ -29,13 +29,12 @@ class DialogAdapter(val userId: Int, val currentDialogId: Int) : RecyclerView.Ad
         Realm.getDefaultInstance().use { realm ->
             updatedMessages = realm.copyFromRealm(realm.where(Message::class.java)
                     .equalTo("dialogId", currentDialogId)
-                    .findAllSorted("date", Sort.DESCENDING))
+                    .findAllSorted("date", DESCENDING))
         }
         uiThread {
             messages = updatedMessages
         }
     }
-
 
     override fun getItemViewType(position: Int) = if (messages[position].userId == userId) TYPE_USER else TYPE_FRIEND
 
