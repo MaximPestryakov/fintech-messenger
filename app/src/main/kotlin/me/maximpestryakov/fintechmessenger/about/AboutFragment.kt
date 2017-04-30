@@ -9,6 +9,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_about.*
 import me.maximpestryakov.fintechmessenger.R
+import org.jetbrains.anko.sdk19.listeners.onClick
 
 class AboutFragment : Fragment() {
 
@@ -20,7 +21,7 @@ class AboutFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        creatorButton.setOnClickListener {
+        creatorButton.onClick {
             creatorName.visibility = if (creatorName.visibility == GONE) VISIBLE else GONE
             creatorLink.visibility = if (creatorLink.visibility == GONE) VISIBLE else GONE
         }

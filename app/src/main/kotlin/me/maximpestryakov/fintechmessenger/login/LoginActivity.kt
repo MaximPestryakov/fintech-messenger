@@ -9,6 +9,8 @@ import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.login.LoginTaskFragment.Companion.LoginListener
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity.Companion.EXTRA_EMAIL
+import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity.Companion.EXTRA_USER_ID
+import org.jetbrains.anko.sdk19.listeners.onClick
 import org.jetbrains.anko.startActivity
 import java.lang.Thread.sleep
 
@@ -37,7 +39,7 @@ class LoginActivity : AppCompatActivity(), LoginView, LoginListener {
             showLoginForm()
         }
 
-        login.setOnClickListener {
+        login.onClick {
             showLoading()
             loginTaskFragment.start {
                 sleep(0)
@@ -46,8 +48,8 @@ class LoginActivity : AppCompatActivity(), LoginView, LoginListener {
         }
     }
 
-    override fun onLogin(email: String) {
-        startActivity<NavigationActivity>(EXTRA_EMAIL to email)
+    override fun onLogin(userId: Int, email: String) {
+        startActivity<NavigationActivity>(EXTRA_USER_ID to userId, EXTRA_EMAIL to email)
         finish()
     }
 

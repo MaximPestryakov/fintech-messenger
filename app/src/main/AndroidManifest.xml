@@ -22,7 +22,9 @@
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/LoginTheme" />
-        <activity android:name="me.maximpestryakov.fintechmessenger.dialog.DialogActivity" />
+        <activity
+            android:name="me.maximpestryakov.fintechmessenger.dialog.DialogActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="me.maximpestryakov.fintechmessenger.navigation.NavigationActivity"
             android:theme="@style/AppTheme.NoActionBar" />

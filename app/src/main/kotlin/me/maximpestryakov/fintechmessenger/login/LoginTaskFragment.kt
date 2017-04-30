@@ -16,13 +16,13 @@ class LoginTaskFragment : Fragment() {
             get() = LoginTaskFragment()
 
         interface LoginListener {
-            fun onLogin(email: String)
+            fun onLogin(userId: Int, email: String)
         }
     }
 
     private var listener: LoginListener? = null
 
-    private lateinit var result: String
+    private lateinit var email: String
 
     var started = false
         private set
@@ -43,9 +43,9 @@ class LoginTaskFragment : Fragment() {
         }
         doAsync {
             started = true
-            result = task()
+            email = task()
             uiThread {
-                if (listener?.onLogin(result) != null) {
+                if (listener?.onLogin(42, email) != null) {
                     callbackStarted = true
                 }
                 started = false
@@ -58,7 +58,7 @@ class LoginTaskFragment : Fragment() {
         super.onAttach(context)
         listener = context as? LoginListener ?: throw IllegalArgumentException()
         if (finished && !callbackStarted) {
-            listener?.onLogin(result)
+            listener?.onLogin(42, email)
         }
     }
 

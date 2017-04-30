@@ -1,38 +1,45 @@
 package me.maximpestryakov.fintechmessenger.dialog
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.activity_dialog.*
 import me.maximpestryakov.fintechmessenger.R
-import me.maximpestryakov.fintechmessenger.model.Message
 
-class DialogActivity : AppCompatActivity() {
+class DialogActivity : MvpAppCompatActivity(), DialogView {
 
     companion object {
+        val EXTRA_USER_ID = "me.maximpestryakov.fintechmessenger.dialog.EXTRA_USER_ID"
         val EXTRA_DIALOG_ID = "me.maximpestryakov.fintechmessenger.dialog.EXTRA_DIALOG_ID"
     }
 
-    val dialogAdapter = DialogAdapter(123)
-    val messages = mutableListOf(Message(4, 3, "Привет", 1490271711), Message(5, 123, "Привет)))", 1490271712))
-    var testId = 6
+    @InjectPresenter
+    lateinit var dialogPresenter: DialogPresenter
+
+    lateinit var dialogAdapter: DialogAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialog)
 
-        // val dialogId = intent.getIntExtra(EXTRA_DIALOG_ID, 0)
+        setSupportActionBar(dialogToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        initMessageList()
+        val userId = intent.getIntExtra(EXTRA_DIALOG_ID, 0)
+        val dialogId = intent.getIntExtra(EXTRA_DIALOG_ID, 0)
 
-        updateMessageList()
-        messageSender.onSendListener = { s ->
-            messages.add(Message(testId++, 123, s.trim(), messages.last().time + testId))
-            updateMessageList()
-        }
+        dialogAdapter = DialogAdapter(userId, dialogId)
+
+        messageSender.onSend { text -> dialogPresenter.onSendMessage(text, userId, dialogId) }
     }
 
-    fun initMessageList() {
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
+    }
+
+    override fun initMessageList() {
         messageList.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@DialogActivity).apply {
@@ -42,7 +49,7 @@ class DialogActivity : AppCompatActivity() {
         }
     }
 
-    fun updateMessageList() {
-        dialogAdapter.messages = messages.sortedByDescending { it.time }
+    override fun updateMessageList() {
+        dialogAdapter.update()
     }
 }

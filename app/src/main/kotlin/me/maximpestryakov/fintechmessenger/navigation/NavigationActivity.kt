@@ -19,9 +19,12 @@ import me.maximpestryakov.fintechmessenger.settings.SettingsFragment
 class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object {
+        val EXTRA_USER_ID = "me.maximpestryakov.fintechmessenger.navigation.EXTRA_USER_ID"
         val EXTRA_EMAIL = "me.maximpestryakov.fintechmessenger.navigation.EXTRA_EMAIL"
         private val MENU_DIALOGS = 0
     }
+
+    private var userId: Int = 0
 
     private lateinit var toggle: ActionBarDrawerToggle
 
@@ -29,6 +32,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
+        userId = intent.getIntExtra(EXTRA_USER_ID, 0)
         val email = intent.getStringExtra(EXTRA_EMAIL)
         navigationView.getHeaderView(0).textView.text = email
 
@@ -56,7 +60,7 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_dialogs -> {
-                val dialogsFragment = DialogListFragment.newInstance(123)
+                val dialogsFragment = DialogListFragment.newInstance(userId)
                 addFragment(dialogsFragment)
             }
             R.id.nav_settings -> {

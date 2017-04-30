@@ -4,24 +4,42 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.raizlabs.android.dbflow.kotlinextensions.*
+import com.raizlabs.android.dbflow.sql.language.OrderBy.fromProperty
 import kotlinx.android.synthetic.main.item_message_left.view.*
 import kotlinx.android.synthetic.main.item_message_right.view.*
 import me.maximpestryakov.fintechmessenger.R
 import me.maximpestryakov.fintechmessenger.model.Message
+import me.maximpestryakov.fintechmessenger.model.Message_Table.date
+import me.maximpestryakov.fintechmessenger.model.Message_Table.dialogId
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
-class DialogAdapter(val userId: Int) : RecyclerView.Adapter<DialogAdapter.ViewHolder>() {
+class DialogAdapter(val userId: Int, val currentDialogId: Int) : RecyclerView.Adapter<DialogAdapter.ViewHolder>() {
 
     private val TYPE_USER = 0
     private val TYPE_FRIEND = 1
 
-    var messages = emptyList<Message>()
+    private var messages = emptyList<Message>()
         set(messages) {
             field = messages
             notifyDataSetChanged()
         }
 
-    override fun getItemViewType(position: Int) = if (messages[position].senderId == userId) TYPE_USER else TYPE_FRIEND
+    fun update() {
+        doAsync {
+            val updatedMessages = (select
+                    from Message::class
+                    where (dialogId eq currentDialogId)
+                    orderBy fromProperty(date).descending()
+                    ).list
+            uiThread {
+                messages = updatedMessages
+            }
+        }
+    }
 
+    override fun getItemViewType(position: Int) = if (messages[position].userId == userId) TYPE_USER else TYPE_FRIEND
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -42,7 +60,6 @@ class DialogAdapter(val userId: Int) : RecyclerView.Adapter<DialogAdapter.ViewHo
             bindFriendMessage(message)
         }
     }
-
 
     override fun getItemCount() = messages.size
 

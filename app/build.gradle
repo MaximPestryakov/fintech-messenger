@@ -53,6 +53,7 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    dexOptions.preDexLibraries = true
 }
 
 ext {
@@ -60,6 +61,12 @@ ext {
     gsonVersion = '2.8.0'
     picassoVerion = '2.5.2'
     ankoVersion = '0.10.0-beta-2'
+    moxyVersion = '1.5.1'
+    dbFlowVersion = '4.0.0-beta7'
+}
+
+kapt {
+    generateStubs = true
 }
 
 dependencies {
@@ -87,8 +94,23 @@ dependencies {
 
     // Anko
     compile "org.jetbrains.anko:anko-sdk19:$ankoVersion"
+    compile "org.jetbrains.anko:anko-sdk19-listeners:$ankoVersion"
     compile "org.jetbrains.anko:anko-appcompat-v7:$ankoVersion"
     compile "org.jetbrains.anko:anko-cardview-v7:$ankoVersion"
     compile "org.jetbrains.anko:anko-design:$ankoVersion"
     compile "org.jetbrains.anko:anko-recyclerview-v7:$ankoVersion"
+    compile "org.jetbrains.anko:anko-support-v4:$ankoVersion"
+
+    // Moxy
+    compile "com.arello-mobile:moxy:$moxyVersion"
+    compile "com.arello-mobile:moxy-android:$moxyVersion"
+    compile "com.arello-mobile:moxy-app-compat:$moxyVersion"
+    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+
+    // DBFlow
+    compile "com.github.Raizlabs.DBFlow:dbflow:$dbFlowVersion"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:$dbFlowVersion"
+    compile "com.github.Raizlabs.DBFlow:dbflow-kotlinextensions:$dbFlowVersion"
+    kapt "com.github.Raizlabs.DBFlow:dbflow-processor:$dbFlowVersion"
+
 }

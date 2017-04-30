@@ -1,45 +1,40 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardUseCompatPadding="true"
+    tools:context=".MessageView">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:foreground="?selectableItemBackground"
-        app:cardUseCompatPadding="true">
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/messageText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_weight="1"
+            android:padding="16dp"
+            tools:text="There are two kinds of people — those who learn the hard way and those who learn by taking someone’s advice. Here are some of the things I’ve learned along the way that I want to share with you." />
+
+        <TextView
+            android:id="@+id/messageDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="0dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="0dp"
+            android:paddingTop="8dp"
+            android:textSize="14sp"
+            tools:text="4:19" />
 
-            <TextView
-                android:id="@+id/messageText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|end"
-                android:layout_margin="16dp"
-                android:textColor="@color/colorPrimaryText"
-                android:textSize="16sp"
-                tools:text="Textassdffasdfdsfassdfgdfdzaqwsxedcfrvgtbhynbtgvrfcedxwszwsdefrgtved" />
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-
-    <TextView
-        android:id="@+id/messageDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:lines="1"
-        tools:text="4:20" />
-
-</LinearLayout>
-
+</android.support.v7.widget.CardView>

@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".about.AboutFragment">
 
     <Button
         android:id="@+id/creatorButton"
