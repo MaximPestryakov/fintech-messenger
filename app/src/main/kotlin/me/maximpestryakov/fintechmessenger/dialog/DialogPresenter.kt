@@ -14,8 +14,6 @@ class DialogPresenter : MvpPresenter<DialogView>() {
 
     override fun attachView(view: DialogView?) {
         super.attachView(view)
-
-        viewState.initMessageList()
         viewState.updateMessageList()
     }
 

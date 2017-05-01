@@ -7,8 +7,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 interface DialogView : MvpView {
 
     @StateStrategyType(value = OneExecutionStateStrategy::class)
-    fun initMessageList()
-
-    @StateStrategyType(value = OneExecutionStateStrategy::class)
     fun updateMessageList()
 }

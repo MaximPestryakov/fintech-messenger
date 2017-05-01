@@ -39,9 +39,7 @@ class DialogListFragment : MvpAppCompatFragment(), DialogListView {
         super.onViewCreated(view, savedInstanceState)
 
         addDialog.onClick { dialogListPresenter.onAddDialog() }
-    }
 
-    override fun initDialogList() {
         dialogAdapter = DialogListAdapter { dialog ->
             startActivity<DialogActivity>(EXTRA_USER_ID to userId, EXTRA_DIALOG_ID to dialog.id)
         }
@@ -51,6 +49,7 @@ class DialogListFragment : MvpAppCompatFragment(), DialogListView {
             setHasFixedSize(true)
             layoutManager = linearLayoutManager
             adapter = dialogAdapter
+            invalidateItemDecorations()
             addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation))
         }
     }

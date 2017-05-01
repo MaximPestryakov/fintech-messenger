@@ -11,10 +11,8 @@ class DialogListPresenter : MvpPresenter<DialogListView>() {
 
     private val realm = Realm.getDefaultInstance()
 
-    override fun attachView(view: DialogListView?) {
+    override fun attachView(view: DialogListView) {
         super.attachView(view)
-
-        viewState.initDialogList()
         viewState.updateDialogList()
     }
 

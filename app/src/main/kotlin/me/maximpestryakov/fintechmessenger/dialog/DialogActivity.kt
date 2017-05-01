@@ -45,15 +45,6 @@ class DialogActivity : MvpAppCompatActivity(), DialogView {
 
         dialogAdapter = DialogAdapter(userId, dialogId)
 
-        messageSender.onSend { text -> dialogPresenter.onSendMessage(text, userId, dialogId) }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        super.onBackPressed()
-        return true
-    }
-
-    override fun initMessageList() {
         messageList.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@DialogActivity).apply {
@@ -61,6 +52,13 @@ class DialogActivity : MvpAppCompatActivity(), DialogView {
             }
             adapter = dialogAdapter
         }
+
+        messageSender.onSend { text -> dialogPresenter.onSendMessage(text, userId, dialogId) }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        super.onBackPressed()
+        return true
     }
 
     override fun updateMessageList() {
