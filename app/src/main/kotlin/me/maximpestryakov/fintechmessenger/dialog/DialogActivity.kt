@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_dialog.*
 import me.maximpestryakov.fintechmessenger.R
+import me.maximpestryakov.fintechmessenger.model.Dialog
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class DialogActivity : MvpAppCompatActivity(), DialogView {
 
@@ -28,6 +32,16 @@ class DialogActivity : MvpAppCompatActivity(), DialogView {
 
         val userId = intent.getIntExtra(EXTRA_DIALOG_ID, 0)
         val dialogId = intent.getIntExtra(EXTRA_DIALOG_ID, 0)
+
+        doAsync {
+            var title = ""
+            Realm.getDefaultInstance().use {
+                title = it.where(Dialog::class.java).equalTo("id", dialogId).findFirst().title
+            }
+            uiThread {
+                supportActionBar?.title = title
+            }
+        }
 
         dialogAdapter = DialogAdapter(userId, dialogId)
 
