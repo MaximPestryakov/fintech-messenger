@@ -24,7 +24,10 @@ class DialogPresenter : MvpPresenter<DialogView>() {
             val lastId = realm.where(Message::class.java).max("id")?.toInt() ?: 0
             val message = Message(id = lastId + 1, body = messageText, userId = userId, dialogId = dialogId)
             realm.copyToRealm(message)
-            realm.where(Dialog::class.java).equalTo("id", dialogId).findFirst().lastMessage = messageText
+            realm.where(Dialog::class.java).equalTo("id", dialogId).findFirst().apply {
+                lastMessage = message.body
+                lastDate = message.date
+            }
         }, {
             viewState.updateMessageList()
         }, { error ->

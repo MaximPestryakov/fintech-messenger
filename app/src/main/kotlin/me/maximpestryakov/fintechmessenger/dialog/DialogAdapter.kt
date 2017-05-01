@@ -14,11 +14,15 @@ import me.maximpestryakov.fintechmessenger.dialog.DialogAdapter.DialogViewHolder
 import me.maximpestryakov.fintechmessenger.model.Message
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DialogAdapter(val userId: Int, val currentDialogId: Int) : RecyclerView.Adapter<DialogViewHolder>() {
 
     private val TYPE_USER = 0
     private val TYPE_FRIEND = 1
+
+    private val dateFormat = SimpleDateFormat("hh:mm", Locale.getDefault())
 
     private var messages = emptyList<Message>()
         set(messages) {
@@ -54,9 +58,9 @@ class DialogAdapter(val userId: Int, val currentDialogId: Int) : RecyclerView.Ad
         val message = messages[position]
 
         if (getItemViewType(position) == TYPE_USER) {
-            bindUserMessage(message)
+            bindUserMessage(message, dateFormat)
         } else {
-            bindFriendMessage(message)
+            bindFriendMessage(message, dateFormat)
         }
     }
 
@@ -64,14 +68,14 @@ class DialogAdapter(val userId: Int, val currentDialogId: Int) : RecyclerView.Ad
 
     class DialogViewHolder(val view: View) : ViewHolder(view) {
 
-        fun bindUserMessage(message: Message) = with(itemView) {
+        fun bindUserMessage(message: Message, dateFormat: SimpleDateFormat) = with(itemView) {
             messageRight.text = message.body
-            messageRight.date = "4:20"
+            messageRight.date = dateFormat.format(Date(message.date))
         }
 
-        fun bindFriendMessage(message: Message) = with(itemView) {
+        fun bindFriendMessage(message: Message, dateFormat: SimpleDateFormat) = with(itemView) {
             messageLeft.text = message.body
-            messageLeft.date = "4:19"
+            messageLeft.date = dateFormat.format(Date(message.date))
         }
     }
 }

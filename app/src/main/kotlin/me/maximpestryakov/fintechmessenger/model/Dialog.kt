@@ -12,7 +12,9 @@ open class Dialog(
 
         open var description: String = "",
 
-        open var date: Long = 0,
+        open var date: Long = System.currentTimeMillis(),
 
-        open var lastMessage: String = ""
+        open var lastMessage: String = "",
+
+        open var lastDate: Long = System.currentTimeMillis()
 ) : RealmObject()

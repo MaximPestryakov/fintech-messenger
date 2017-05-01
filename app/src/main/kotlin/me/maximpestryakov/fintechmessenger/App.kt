@@ -18,7 +18,7 @@ class App : Application() {
         Realm.init(this)
 
         val config = RealmConfiguration.Builder()
-                .schemaVersion(1)
+                .schemaVersion(2)
                 .migration(Migration)
                 .build()
 

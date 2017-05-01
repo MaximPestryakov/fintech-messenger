@@ -35,8 +35,8 @@ class DialogActivity : MvpAppCompatActivity(), DialogView {
 
         doAsync {
             var title = ""
-            Realm.getDefaultInstance().use {
-                title = it.where(Dialog::class.java).equalTo("id", dialogId).findFirst().title
+            Realm.getDefaultInstance().use { realm ->
+                title = realm.where(Dialog::class.java).equalTo("id", dialogId).findFirst().title
             }
             uiThread {
                 supportActionBar?.title = title

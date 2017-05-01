@@ -22,7 +22,23 @@ object Migration : RealmMigration {
                     dialog.set("lastMessage", lastMessage)
                 }
             }
+            oldVersion.inc()
+        }
 
+        if (oldVersion == 1L) {
+            schema.get("Dialog").apply {
+                addField("lastDate", Long::class.java)
+                transform { dialog ->
+                    val dialogId = dialog.getInt("id")
+                    val lastDate = realm.where("Message")
+                            .equalTo("dialogId", dialogId)
+                            .findAllSorted("date", Sort.DESCENDING)
+                            .getOrNull(0)
+                            ?.getLong("date") ?: dialog.getLong("date")
+
+                    dialog.set("lastDate", lastDate)
+                }
+            }
             oldVersion.inc()
         }
     }
