@@ -2,9 +2,7 @@ package me.maximpestryakov.fintechmessenger.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
 
-@RealmClass
 open class Dialog(
 
         @PrimaryKey

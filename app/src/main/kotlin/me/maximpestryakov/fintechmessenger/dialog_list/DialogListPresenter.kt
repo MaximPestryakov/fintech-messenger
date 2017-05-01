@@ -1,14 +1,15 @@
 package me.maximpestryakov.fintechmessenger.dialog_list
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import io.realm.Realm
 import me.maximpestryakov.fintechmessenger.model.Dialog
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 @InjectViewState
 class DialogListPresenter : MvpPresenter<DialogListView>() {
+
+    private val realm = Realm.getDefaultInstance()
 
     override fun attachView(view: DialogListView?) {
         super.attachView(view)
@@ -17,19 +18,22 @@ class DialogListPresenter : MvpPresenter<DialogListView>() {
         viewState.updateDialogList()
     }
 
-    fun onAddDialog() = doAsync {
-        Realm.getDefaultInstance().use {
-            it.executeTransaction { realm ->
-                val lastId = realm.where(Dialog::class.java).max("id")?.toInt() ?: 0
-                val dialog = Dialog(id = lastId + 1).apply {
-                    title = "Dialog #$id"
-                    description = "Description #$id"
-                }
-                realm.copyToRealm(dialog)
-            }
-        }
-        uiThread {
+    fun onAddDialog() {
+        realm.executeTransactionAsync({ realm ->
+            val lastId = realm.where(Dialog::class.java).max("id")?.toInt() ?: 0
+            realm.copyToRealm(Dialog(id = lastId + 1).apply {
+                title = "Dialog #$id"
+                description = "Description #$id"
+            })
+        }, {
             viewState.updateDialogList()
-        }
+        }, { error ->
+            Log.e("Realm", error.message)
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        realm.close()
     }
 }
