@@ -62,14 +62,17 @@ class NavigationActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             R.id.nav_dialogs -> {
                 val dialogsFragment = DialogListFragment.newInstance(userId)
                 addFragment(dialogsFragment)
+                supportActionBar?.setTitle(R.string.menu_dialogs)
             }
             R.id.nav_settings -> {
                 val settingsFragment = SettingsFragment()
                 addFragment(settingsFragment)
+                supportActionBar?.setTitle(R.string.menu_settings)
             }
             R.id.nav_about -> {
                 val aboutFragment = AboutFragment()
                 addFragment(aboutFragment)
+                supportActionBar?.setTitle(R.string.menu_about)
             }
             R.id.nav_exit -> finish()
         }
