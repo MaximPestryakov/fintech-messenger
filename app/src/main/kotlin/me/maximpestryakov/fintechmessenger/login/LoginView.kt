@@ -1,8 +1,22 @@
 package me.maximpestryakov.fintechmessenger.login
 
-interface LoginView {
+import android.support.annotation.StringRes
+import com.arellomobile.mvp.MvpView
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
+import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
-    fun showLoginForm();
+interface LoginView : MvpView {
 
-    fun showLoading();
+    @StateStrategyType(value = SingleStateStrategy::class)
+    fun showLoginForm()
+
+    @StateStrategyType(value = SingleStateStrategy::class)
+    fun showLoading()
+
+    @StateStrategyType(value = OneExecutionStateStrategy::class)
+    fun loginSuccess(userId: Int, email: String)
+
+    @StateStrategyType(value = SingleStateStrategy::class)
+    fun loginFailure(@StringRes messageId: Int)
 }

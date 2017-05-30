@@ -10,7 +10,7 @@ import me.maximpestryakov.fintechmessenger.model.Message
 @InjectViewState
 class DialogPresenter : MvpPresenter<DialogView>() {
 
-    private val realm = Realm.getDefaultInstance()
+    private val realm by lazy { Realm.getDefaultInstance() }
 
     override fun attachView(view: DialogView?) {
         super.attachView(view)

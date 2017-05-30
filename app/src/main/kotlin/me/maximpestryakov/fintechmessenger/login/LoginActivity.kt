@@ -1,56 +1,30 @@
 package me.maximpestryakov.fintechmessenger.login
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 import me.maximpestryakov.fintechmessenger.R
-import me.maximpestryakov.fintechmessenger.login.LoginTaskFragment.Companion.LoginListener
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity.Companion.EXTRA_EMAIL
 import me.maximpestryakov.fintechmessenger.navigation.NavigationActivity.Companion.EXTRA_USER_ID
 import org.jetbrains.anko.sdk19.listeners.onClick
 import org.jetbrains.anko.startActivity
-import java.lang.Thread.sleep
 
-class LoginActivity : AppCompatActivity(), LoginView, LoginListener {
+class LoginActivity : MvpAppCompatActivity(), LoginView {
 
-    lateinit var loginTaskFragment: LoginTaskFragment
+    @InjectPresenter
+    lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val fragment = supportFragmentManager.findFragmentByTag(LoginTaskFragment.TAG)
-        if (fragment == null) {
-            loginTaskFragment = LoginTaskFragment.newInstance
-            supportFragmentManager.beginTransaction().apply {
-                add(loginTaskFragment, LoginTaskFragment.TAG)
-                addToBackStack(null)
-            }.commit()
-        } else {
-            loginTaskFragment = fragment as LoginTaskFragment
-        }
-
-        if (loginTaskFragment.started) {
-            showLoading()
-        } else {
-            showLoginForm()
-        }
-
         login.onClick {
-            showLoading()
-            loginTaskFragment.start {
-                sleep(0)
-                email.text.toString()
-            }
+            presenter.onLogin(email.text.toString(), password.text.toString())
         }
-    }
-
-    override fun onLogin(userId: Int, email: String) {
-        startActivity<NavigationActivity>(EXTRA_USER_ID to userId, EXTRA_EMAIL to email)
-        finish()
     }
 
     override fun showLoginForm() {
@@ -65,5 +39,14 @@ class LoginActivity : AppCompatActivity(), LoginView, LoginListener {
         password.isEnabled = false
         progressBar.visibility = VISIBLE
         login.visibility = GONE
+    }
+
+    override fun loginSuccess(userId: Int, email: String) {
+        startActivity<NavigationActivity>(EXTRA_USER_ID to userId, EXTRA_EMAIL to email)
+        finish()
+    }
+
+    override fun loginFailure(messageId: Int) {
+        // TODO
     }
 }
